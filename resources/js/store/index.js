@@ -1,0 +1,126 @@
+import Vue from "vue";
+import Vuex from "vuex";
+import repository from "../api/repository"
+import axios from 'axios'
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+    state: {
+        selected: "home",
+        articles: [],
+        article: [],
+        comments: [],
+        newComments: [],
+        user: sessionStorage.user ? JSON.parse(sessionStorage.getItem("user")) : null
+    },
+    mutations: {
+        changeSelected(state, payload){
+            state.selected = payload
+        },
+        SET_ARTICLES(state, payload){
+            let articles = payload.data
+            for(const article of articles){
+                article.created_at = article.created_at.slice(0, 10)
+            }
+            state.articles = articles
+        },
+        SET_ARTICLE_INFO(state, payload){
+            state.article = payload.article
+            state.comments = payload.comments
+        },
+        SET_NEW_COMMENT(state, payload){
+            state.newComments.push(payload)
+        },
+        SET_NEW_REPLY(state, payload){
+
+            for(const [key, value] of Object.entries(state.comments)){
+                if(payload.comment_id === state.comments[key].id){
+                    state.comments[key].replies.push(payload)
+                }
+            }
+
+            for(const [key, value] of Object.entries(state.newComments)){
+                if(payload.comment_id === state.newComments[key].id){
+                    state.newComments[key].replies.push(payload)
+                }
+            }
+        },
+        SET_USER(state, payload){
+            state.user = payload
+        },
+        CLEAR_STATE(state, payload){
+            state.newComments = []
+        }
+
+
+      
+    },
+    getters: {
+        user: state => state.user,
+        authenticated: state => state.user !== null,
+
+        selected(state){
+            return state.selected
+        },
+        comments(state){
+            return state.comments
+        },
+
+    },
+    actions: {
+        getArticles({ commit }){
+            try {
+                axios.get("/api/getArticles")
+                .then(response => {
+                    commit("SET_ARTICLES", response)
+                })
+            } catch (error) {
+                console.log(error)
+            }
+            
+        },
+        getArticle({ commit }, payload){
+            axios.get(`/api/getArticleInfo/${payload.id}`)
+            .then(response => {
+                commit("SET_ARTICLE_INFO", response.data)
+            })
+        },
+        submitComment({ commit }, payload){
+            axios.post("api/postComment", payload)
+            .then(response => {
+                commit("SET_NEW_COMMENT", response.data)
+            })
+        },
+        submitReply({ commit }, payload){
+            axios.post("api/postReply", payload)
+            .then(response => {
+                commit("SET_NEW_REPLY", response.data)
+            })
+        },
+        async login({commit}, payload){
+            await repository.createSession()
+            const { data } = await repository.login(payload)
+            commit("SET_USER", data)
+
+            sessionStorage.user = JSON.stringify(data)
+        },
+
+        async logout({commit}){
+            await repository.logout()
+            commit("SET_USER", null)
+            sessionStorage.removeItem("user")
+            
+        },
+
+        register({commit}, payload){
+           axios.post("api/register", payload)
+           .then(response => {
+               console.log(response)
+           })
+        
+        }
+
+    },
+      
+});
