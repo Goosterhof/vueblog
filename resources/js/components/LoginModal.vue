@@ -1,7 +1,7 @@
 <template>
   <div>
     
-  <b-modal id="loginModal">
+  <b-modal id="loginModal" size="sm">
       <div class="crd" >
           <b-form @submit.prevent="submit()">
               <b-form-group class="input" label="username" label-for="input-username">
@@ -24,7 +24,7 @@
     </template>
   </b-modal>
   
-  <b-modal id="registerModal">
+  <b-modal id="registerModal" size="sm">
       <div class="crd" >
           <b-form @submit.prevent="submit()">
               <b-form-group class="input" label="username" label-for="input-username">
@@ -125,7 +125,7 @@ export default {
 <style>
 .crd {
     padding-top: 30px;
-    width: 275px;
+    width: 270px;
     background: rgb(29, 24, 24);
     display: flex;
     justify-content: center;
@@ -145,7 +145,7 @@ export default {
 
 .error {
   position: absolute; 
-  left: 220px; 
+  left: 120px; 
   bottom: 50px;
   color: rgb(189, 0, 0);
 }

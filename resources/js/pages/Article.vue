@@ -35,9 +35,6 @@ export default {
 
 <style scoped>
 
-.container {
-  width: 300px;
-}
 
 .title {
   font-size: 50px;
