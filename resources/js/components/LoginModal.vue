@@ -12,7 +12,7 @@
               </b-form-group>
               <b-button style="align-self: center;" type="submit" variant="primary">Log in</b-button>
               <p v-if="error" class="error">Incorrect Credentials</p>
-             <p style="position: relative; left: 80px; color: white;"> No account?  — <a @click="changeToRegister" class="register">Register</a></p>
+             <p style="position: relative; left: 70px; color: white;"> No account?  — <a @click="changeToRegister" class="register">Register</a></p>
           </b-form>
       </div>
       <template #modal-header="{}">
@@ -39,7 +39,7 @@
               <b-button style="align-self: center;" type="submit" variant="primary">Register</b-button>
               <p v-if="error === 'passwordsDontMatch'" class="error">Passwords do not match</p>
               <p v-if="error === 'usernameTaken'" class="error">Username is not available</p>
-             <p style="position: relative; left: 60px; color: white;"> Have an account?  — <a @click="changeToLogin" class="register">Login</a></p>
+             <p style="position: relative; left: 50px; color: white;"> Have an account?  — <a @click="changeToLogin" class="register">Login</a></p>
           </b-form>
       </div>
       <template #modal-header="{}">
@@ -125,13 +125,12 @@ export default {
 <style>
 .crd {
     padding-top: 30px;
-    width: 325px;
+    width: 275px;
     background: rgb(29, 24, 24);
     display: flex;
     justify-content: center;
     flex-direction: row;
     border-radius: 3px;
-    margin-left: 60px;
 }
 
 .input {

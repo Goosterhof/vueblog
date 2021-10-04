@@ -1,6 +1,6 @@
 <template>
   <div>
-      <div class="header">Recent Articles</div>
+      <p class="header">Latest Articles</p>
        <div class="postListArea">
               <div v-for="article in articles" :key="article.id">
                   <div class="postListArticle">
@@ -33,33 +33,31 @@ export default {
 <style scoped>
 
 .header {
-    width: auto;
-    height: 70px;
-    border-bottom: 2px solid black;
-    margin-bottom: 30px;
     font-size: 30px;
-    text-align: center;
-    line-height: 80px;
+    border-bottom: 1px solid black;
+    right: 100px;
+    position: absolute;
 }
 
 .postListArea {
-    height: 85.3vh;
+    right: 10px;
+    top: 130px;
+    align-self: flex-end;
     display: flex;
-    width: 30vw;
     flex-direction: column;
-    justify-content: space-between;
+    row-gap: 5px;
+    position: absolute;
 }
 
 .postListArticle {
     background: rgb(19, 18, 18);
-    align-content: center;
-    height: 60px;
+    min-height: 50px;
+    width: 400px;
+    text-align: center;
 }
 
 .postListTitles {
-    text-align: center;
     font-size: 20px;
-    line-height: 55px;
     color: white;
 }
 
@@ -73,7 +71,6 @@ export default {
     float: right;
     line-height: 0px;
     font-size: 10px;
-    margin-right: 3px;
 }
 
 </style>

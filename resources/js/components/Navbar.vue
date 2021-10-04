@@ -1,13 +1,13 @@
 <template>
   <div class="header">
-      <div class="blackbox" style="float: left;"></div>
-      <a class="home" @click="changeSelect('home')" href="/#/">
-        Home
-        <div class="stripe" v-if="selected === 'home'"></div>
-      </a>
-      <a v-if="!authenticated" style="margin-left: auto; margin-right: 50px; color: white" v-b-modal.loginModal > log in</a>
-      <div v-if="authenticated"> 
-          <p style="margin-left: auto; margin-right: 20px; margin-top: 20px; color: white">Welcome {{user.username}}</p>
+     
+      <a v-if="!authenticated" style="color: white; margin-left: 20px" v-b-modal.loginModal > log in</a>
+      <router-link v-if="authenticated" :to="{name: 'home'}" style="margin-left: 20px" >Home</router-link>
+      <router-link v-if="authenticated" :to="{name: 'dashboard'}" style="margin-left: 10px;">Dashboard</router-link>
+
+      
+      <div v-if="authenticated" style="margin-left: auto; margin-right: 10px; margin-top: 20px;"> 
+          <p style="color: white">Welcome {{user.username}}</p>
           <a @click="logout()" class="signout">Sign out</a>
       </div>
      
@@ -18,7 +18,7 @@
 
         
 
-      <div class="blackbox" style="float: right;"></div>
+    
   </div>
 </template>
 
@@ -57,16 +57,6 @@ export default {
 
 <style scoped>
 
-.stripe {
-    height: 1px;
-    background: white;
-}
-
-.createstripe {
-    height: 3px;
-    width: 200px;
-    background: white;
-}
 
 .header {
   width: 100%;
@@ -78,20 +68,13 @@ export default {
 }
 
 a {
-    text-decoration: none;
+    
     font-size: 20px;
     color: white;
 }
 
-.blackbox {
-    height: 70px;
-    width: 70px;
-    background: black;
-}
-
-.home {
-    margin-right: auto;
-    margin-left: 20px;
+.router-link-exact-active {
+    text-decoration: underline;
 }
 
 .login {
