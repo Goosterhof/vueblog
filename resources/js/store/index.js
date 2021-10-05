@@ -20,6 +20,7 @@ export default new Vuex.Store({
         },
         SET_ARTICLES(state, payload){
             let articles = payload.data
+            console.log(payload)
             for(const article of articles){
                 article.created_at = article.created_at.slice(0, 10)
             }
@@ -115,9 +116,6 @@ export default new Vuex.Store({
 
         register({commit}, payload){
            axios.post("api/register", payload)
-           .then(response => {
-               console.log(response)
-           })
         
         }
 

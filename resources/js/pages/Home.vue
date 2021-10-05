@@ -32,7 +32,9 @@
                         <img :src="article.imageUrl" alt="">
                     </router-link>
                         <div class="article">
-                        <div class="tags">Lifestyle</div>
+                        <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
+                            {{tag.subject}}
+                        </div>
                     <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                         <p class="title">{{article.title}}</p>
                         <p class="description">{{article.description}}</p>
@@ -73,6 +75,9 @@ export default {
          handleResize() {
             this.displayType = window.matchMedia('(max-width: 650px)').matches
             ? 'mobile' : 'desktop'
+         },
+         displayArticlesWithThisSubject(subject){
+             console.log("asdjasdk")
          }
     },
     computed: {
@@ -140,6 +145,7 @@ export default {
     background: rgb(241, 241, 241);
     font-size: 15px;
     cursor: pointer;
+    margin-right: 5px;
 }
 
 .title {

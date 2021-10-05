@@ -14,6 +14,8 @@ class Article extends Model
         "body"
     ];
 
+   
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -21,6 +23,6 @@ class Article extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tags::class);
+        return $this->belongsToMany(Tag::class);
     }
 }

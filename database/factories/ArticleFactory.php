@@ -34,7 +34,7 @@ class ArticleFactory extends Factory
             "title" => $this->faker->sentence(5),
             "description" => $this->faker->sentence(25),
             "body" => $this->faker->text(5000),
-            'imageUrl'=> $this->imageArray[rand(0, 5)]
+            'imageUrl'=> $this->imageArray[array_rand($this->imageArray)]
         ];
     }
 }

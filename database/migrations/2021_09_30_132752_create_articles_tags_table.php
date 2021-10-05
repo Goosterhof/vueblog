@@ -13,7 +13,7 @@ class CreateArticlesTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles_tags', function (Blueprint $table) {
+        Schema::create('article_tag', function (Blueprint $table) {
             $table->integer('article_id')->unsigned()->index();
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
             $table->integer('tag_id')->unsigned()->index();

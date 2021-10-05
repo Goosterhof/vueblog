@@ -6,6 +6,7 @@ use App\Http\Resources\articleResource;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,14 @@ class ArticleController extends Controller
 
     public function getArticles()
     {
-        $articles = DB::table("articles")->get();
+        $articles = Article::get()->all();
+        foreach($articles as $article){
+            $subjects = [];
+            foreach($article->tags as $tag){
+                array_push($subjects, $tag->subject);
+            }
+            $article->tags = $subjects;
+        }
         return $articles;
     }
 
