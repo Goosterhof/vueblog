@@ -9,15 +9,13 @@ export default new Vuex.Store({
     state: {
         selected: "home",
         articles: [],
+        filteredArticles: [],
         article: [],
         comments: [],
         newComments: [],
         user: sessionStorage.user ? JSON.parse(sessionStorage.getItem("user")) : null
     },
     mutations: {
-        changeSelected(state, payload){
-            state.selected = payload
-        },
         SET_ARTICLES(state, payload){
             let articles = payload.data
             console.log(payload)
@@ -25,6 +23,18 @@ export default new Vuex.Store({
                 article.created_at = article.created_at.slice(0, 10)
             }
             state.articles = articles
+            state.filteredArticles = articles
+        },
+        FILTER_ARTICLES(state, subject){
+            state.filteredArticles = []
+
+            for(const article of state.articles){
+                for(const tag of article.tags){
+                    if(tag.subject === subject){
+                        state.filteredArticles.push(article)
+                    }
+                }
+            }
         },
         SET_ARTICLE_INFO(state, payload){
             state.article = payload.article
@@ -60,13 +70,10 @@ export default new Vuex.Store({
     getters: {
         user: state => state.user,
         authenticated: state => state.user !== null,
-
-        selected(state){
-            return state.selected
-        },
-        comments(state){
-            return state.comments
-        },
+        comments: state => state.comments,
+        articles(state){
+            return state.filteredArticles
+        }
 
     },
     actions: {
@@ -79,7 +86,6 @@ export default new Vuex.Store({
             } catch (error) {
                 console.log(error)
             }
-            
         },
         getArticle({ commit }, payload){
             axios.get(`/api/getArticleInfo/${payload.id}`)

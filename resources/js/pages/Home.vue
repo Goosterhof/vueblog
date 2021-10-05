@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
 import PostList from "../components/PostList.vue"
 
 export default {
@@ -77,13 +78,13 @@ export default {
             ? 'mobile' : 'desktop'
          },
          displayArticlesWithThisSubject(subject){
-             console.log("asdjasdk")
+             this.$store.commit("FILTER_ARTICLES", subject);
          }
     },
     computed: {
-        articles(){
-            return this.$store.state.articles
-        }
+        ...mapGetters({
+         articles: "articles"
+     })
     },
     created(){
         this.$store.dispatch("getArticles")
