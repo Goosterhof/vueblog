@@ -18,7 +18,6 @@ export default new Vuex.Store({
     mutations: {
         SET_ARTICLES(state, payload){
             let articles = payload.data
-            console.log(payload)
             for(const article of articles){
                 article.created_at = article.created_at.slice(0, 10)
             }
@@ -35,6 +34,9 @@ export default new Vuex.Store({
                     }
                 }
             }
+        },
+        REMOVE_ARTICLE_FILTER(state){
+            state.filteredArticles = state.articles
         },
         SET_ARTICLE_INFO(state, payload){
             state.article = payload.article
@@ -77,15 +79,11 @@ export default new Vuex.Store({
 
     },
     actions: {
-        getArticles({ commit }){
-            try {
-                axios.get("/api/getArticles")
-                .then(response => {
-                    commit("SET_ARTICLES", response)
-                })
-            } catch (error) {
-                console.log(error)
-            }
+        async getArticles({ commit }){
+            return axios.get("/api/getArticles")
+            .then(response => {
+                commit("SET_ARTICLES", response)
+            })
         },
         getArticle({ commit }, payload){
             axios.get(`/api/getArticleInfo/${payload.id}`)

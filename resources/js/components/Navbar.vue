@@ -1,13 +1,15 @@
 <template>
   <div class="header">
-     
-      <a v-if="!authenticated" class='login' v-b-modal.loginModal > log in</a>
-      <router-link v-if="authenticated" :to="{name: 'home'}" style="margin-left: 20px" >Home</router-link>
-      <router-link v-if="authenticated" :to="{name: 'dashboard'}" style="margin-left: 10px;">Dashboard</router-link>
 
+       <img id="hide-logo" style="margin-left: 10px;" :src="logo">
+      <a v-if="!authenticated" style="margin-left: auto; margin-right: 50px;" class='button' v-b-modal.loginModal > log in</a>
+
+      <router-link id="small-font" v-if="authenticated" :to="{name: 'home'}" class="button" style="margin-left: 20px" >Home</router-link>
+      <router-link id="small-font" v-if="authenticated" :to="{name: 'dashboard'}" class="button" style="margin-left: 10px;">Dashboard</router-link>
+      <router-link id="small-font" v-if="authenticated" :to="{name: 'create'}" class="button" style="margin-left: 10px;">New Article</router-link>
       
       <div v-if="authenticated" style="margin-left: auto; margin-right: 10px; margin-top: 20px;"> 
-          <p style="color: white">Welcome {{user.username}}</p>
+          <p id="small-font" style="color: white">Welcome {{user.username}}</p>
           <a @click="logout()" class="signout">Sign out</a>
       </div>
      
@@ -25,11 +27,12 @@
 <script>
 import {mapGetters} from "vuex"
 import LoginModal from "./LoginModal.vue"
+import logo from "../../../public/images/logo.svg"
 
 export default {
     data(){
         return {
-            
+            logo: logo
         }
     },
     components: {
@@ -57,6 +60,14 @@ export default {
 
 <style scoped>
 
+@media only screen and (max-width: 480px) {
+  #hide-logo {display: none}
+}
+
+@media only screen and (max-width: 420px) {
+  #small-font {font-size: 14px}
+}
+
 
 .header {
   width: 100%;
@@ -77,14 +88,12 @@ a {
     text-decoration: underline;
 }
 
-.login {
-    margin-left: auto;
-    margin-right: 50px;
+.button {
+    
     color: lightgrey;
 }
 
-.login:hover {
-    text-decoration: none;
+.button:hover {
     color: white;
 }
 
