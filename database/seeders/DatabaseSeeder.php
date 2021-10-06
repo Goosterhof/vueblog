@@ -26,8 +26,14 @@ class DatabaseSeeder extends Seeder
         $tags = Tag::all();
         foreach($articles as $article){
             $article->tags()->attach(
-                $tags->random(rand(1, 2))->pluck("id")->toArray()
+                $tags->random(rand(1, 2))->pluck("id")
             );
+            if(count($article->tags) === 2){
+                if($article->tags[0] === $article->tags[1]){
+                    $article->tags[1]->delete();
+                }
+            }
+           
         }
     }
 }

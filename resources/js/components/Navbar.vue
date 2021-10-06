@@ -1,7 +1,7 @@
 <template>
   <div class="header">
      
-      <a v-if="!authenticated" style="color: white; margin-left: 20px" v-b-modal.loginModal > log in</a>
+      <a v-if="!authenticated" class='login' v-b-modal.loginModal > log in</a>
       <router-link v-if="authenticated" :to="{name: 'home'}" style="margin-left: 20px" >Home</router-link>
       <router-link v-if="authenticated" :to="{name: 'dashboard'}" style="margin-left: 10px;">Dashboard</router-link>
 
@@ -61,7 +61,7 @@ export default {
 .header {
   width: 100%;
   height: 70px;
-  background: rgb(29, 24, 24);
+  background: linear-gradient(45deg, black, grey);
   box-shadow: 3px 3px 3px grey;
   display: flex;
   align-items: center;
@@ -80,11 +80,17 @@ a {
 .login {
     margin-left: auto;
     margin-right: 50px;
+    color: lightgrey;
+}
+
+.login:hover {
+    text-decoration: none;
+    color: white;
 }
 
 .signout {
     text-decoration: underline;
-    color: gray;
+    color: rgb(43, 42, 42);
     font-size: 14px;
     position: relative;
     left: 50px;

@@ -17,7 +17,7 @@
             </div>
         </div>
             
-       <div v-if="displayType === 'desktop'">
+       <div v-if="displayType === 'tablet'">
            
           <div class="postListWrap">
             <div id="hide-small"><PostList></PostList></div>
@@ -74,8 +74,14 @@ export default {
     },
     methods: {
          handleResize() {
-            this.displayType = window.matchMedia('(max-width: 650px)').matches
-            ? 'mobile' : 'desktop'
+            // this.displayType = window.matchMedia('(max-width: 650px)').matches
+            // ? 'mobile' : 'desktop'
+            let width = window.innerWidth
+            if(width < 650) this.displayType = 'mobile'
+            if(width > 650 && width < 1170) this.displayType = 'tablet'
+            if(width > 1170) this.displayType = 'desktop'
+
+        
          },
          displayArticlesWithThisSubject(subject){
              this.$store.commit("FILTER_ARTICLES", subject);
