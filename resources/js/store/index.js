@@ -73,9 +73,8 @@ export default new Vuex.Store({
         user: state => state.user,
         authenticated: state => state.user !== null,
         comments: state => state.comments,
-        articles(state){
-            return state.filteredArticles
-        }
+        filteredArticles: state => state.filteredArticles,
+        articles: state => state.articles
 
     },
     actions: {

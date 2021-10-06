@@ -64,7 +64,7 @@ export default {
   #hide-logo {display: none}
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 425px) {
   #small-font {font-size: 14px}
 }
 

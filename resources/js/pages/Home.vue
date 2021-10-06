@@ -10,7 +10,7 @@
     </div>
     <div v-if="displayType === 'mobile'">
 
-          <div v-for="(article, index) in articles" :key="article.id" :style="articleBackgrounds[index]" style="margin-bottom: 20px;">
+          <div v-for="(article, index) in filteredArticles" :key="article.id" :style="articleBackgrounds[index]" style="margin-bottom: 20px;">
                 <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                     <div class="mobileImage"><img :src="article.imageUrl"></div>
                 </router-link>
@@ -28,14 +28,12 @@
             
     <div v-if="displayType === 'tablet'">
            
-          <div class="postListWrap">
-            <div id="hide-small"><PostList></PostList></div>
-        </div>
+         
         <div id="hide-small" class="header">
             Most Viewed
         </div>
         <div id="fix-wrapper-size" class="wrap">
-            <div v-for="(article, index) in articles" :key="article.id" style="margin-bottom: 10px; margin-top: 30px;">
+            <div v-for="(article, index) in filteredArticles" :key="article.id" style="margin-bottom: 10px; margin-top: 30px;">
                 <div id="fix-article-size" class="highlightedArticles" :style="articleBackgrounds[index]">
                     <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                         <img :src="article.imageUrl" alt="">
@@ -55,8 +53,12 @@
     </div>
 
     <div v-if="displayType === 'desktop'">
+       <div class="desktopWrap">
+           <div class="postListArea hide-postlist">
+               <PostList></PostList>
+           </div>
         <div class="desktopArticleContainer">
-            <div v-for="(article, index) in articles" :key="article.id">
+            <div v-for="(article, index) in filteredArticles" :key="article.id">
                 <div class="desktopArticle" :style="articleBackgrounds[index]">
                     <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                         <img :src="article.imageUrl" alt="">
@@ -72,7 +74,10 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
+        
+        
     </div>
 
 
@@ -119,13 +124,14 @@ export default {
     },
     computed: {
         ...mapGetters({
-         articles: "articles"
+         articles: "articles",
+         filteredArticles: "filteredArticles"
      })
     },
     async mounted(){
         await this.$store.dispatch("getArticles")
         .then((res) => {
-            for(let i = 0; i < this.articles.length; i++){
+            for(let i = 0; i < this.filteredArticles.length; i++){
                 this.articleBackgrounds.push({
                     background: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.10)`
                 })
@@ -154,6 +160,11 @@ export default {
     #fix-wrapper-size {width: 70vw}
 }
 
+@media only screen and (max-width: 1475px){
+    .hide-postlist{display: none}
+}
+
+
 .wrap {
     display: flex;
     flex-direction: row;
@@ -161,22 +172,24 @@ export default {
     justify-content: space-around;
 }
 
-.postListWrap {
+.desktopWrap {
+    width: 1440px;
     display: flex;
-    flex-wrap: wrap;
+    margin-left: 30px;
+    margin-top: 30px;
     flex-direction: column;
-    align-items: flex-end;
+}
+
+.postListArea {
+    align-self: flex-end;
+    position: absolute;
 }
 
 
 .desktopArticleContainer {
-    margin-left: 30px;
     width: 1120px;
-    height: 1000px;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 30px;
     gap: 45px;
     justify-content: space-between;
 }

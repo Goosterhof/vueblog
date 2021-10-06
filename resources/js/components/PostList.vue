@@ -1,20 +1,19 @@
 <template>
   <div>
-      <p class="header">Latest Articles</p>
-       <div class="postListArea">
-              <div v-for="article in articles" :key="article.id">
-                  <div class="postListArticle">
-                  <router-link :to="{ name: 'articles', params: {articleId: article.id}}" style="text-decoration: none"> 
-                      <div class="postListTitles">{{article.title}}</div>
-                  </router-link>
-              </div>
-              
-              <div class="dateArea">
-                  <p class="datePosted">posted on {{article.created_at}}</p>
-              </div>
-              </div>
-          </div>
-          
+    
+    <div class="container">
+        <div class="header">Recent Articles</div>
+        <div v-for="article in articles" :key="article.id">
+           <div class="article">
+            <div class="subject">{{article.tags[0].subject.toUpperCase()}}</div>
+            <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
+                <div class="title">{{ article.title }}</div>
+            </router-link>
+            <div class="timestamp">{{article.created_at}}</div>
+           </div>
+        </div>
+    </div>
+
   </div>
 </template>
 
@@ -32,45 +31,51 @@ export default {
 
 <style scoped>
 
-.header {
-    font-size: 30px;
-    border-bottom: 1px solid black;
-    right: 100px;
-    position: absolute;
-}
-
-.postListArea {
-    right: 10px;
-    top: 130px;
-    align-self: flex-end;
+.container {
+    margin-top: 20px;
+    width: 300px;
+    height: 600px;
     display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-    position: absolute;
+    flex-wrap: wrap;
 }
 
-.postListArticle {
-    background: rgb(19, 18, 18);
-    min-height: 50px;
-    width: 400px;
-    text-align: center;
+.article {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.582);
+    margin-bottom: 5px;
 }
 
-.postListTitles {
+.header {
     font-size: 20px;
-    color: white;
+    color: rgb(255, 0, 0);
+    font-weight: 600;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
 }
 
-.dateArea {
-    height: 10px;
-    background: rgb(19, 18, 18);
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: black;
 }
 
-.datePosted {
-    color: grey;
-    float: right;
-    line-height: 0px;
-    font-size: 10px;
+.title:hover {
+    color: rgb(151, 5, 5);
 }
+
+.subject {
+    color: rgba(0, 0, 0, 0.479);
+    font-size: 14px;
+}
+
+.timestamp {
+    color: gray;
+    font-size: 12px;
+
+}
+
+a:link { text-decoration: none; }
+
 
 </style>
