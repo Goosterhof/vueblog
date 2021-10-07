@@ -257,9 +257,7 @@ img {
     max-width: 650px;
 }
 
-.pushFooter {
-    margin-bottom: 150px;
-}
+
 
 p {
     color: black;

@@ -120,6 +120,10 @@ export default new Vuex.Store({
         register({commit}, payload){
            axios.post("api/register", payload)
         
+        },
+
+        me({commit}){
+            return axios.get("api/me")
         }
 
     },

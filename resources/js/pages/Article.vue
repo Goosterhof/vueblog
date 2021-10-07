@@ -1,6 +1,7 @@
 <template>
   <div class="container" style="max-width: 700px;">
       <div class="title">{{article.title}}</div>
+        <img style="width: 100%; height: auto" :src="article.imageUrl" alt="">
       <div class="description">{{ article.description }}</div>
       <div class="body">{{article.body}}</div>
        <Comments :articleId="parseInt(this.id)"></Comments>
@@ -39,7 +40,6 @@ export default {
 .title {
   font-size: 50px;
   text-align: center;
-  border-bottom: 1px solid black;
 }
 
 .description {

@@ -43,5 +43,9 @@ html, body {
     width: 100%;
 }
 
+.pushFooter {
+    margin-bottom: 150px;
+}
+
 
 </style>

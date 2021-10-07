@@ -14,5 +14,8 @@ new Vue({
     el: "#app",
     store,
     router,
+    created(){
+        this.$store.dispatch("me")
+    },
     render: (h) => h(App),
 });

@@ -53,8 +53,8 @@
     
 
   <div class="commentsContainer">
-      <div v-for="comment in comments" :key="comment.id">
-          <div class="commentContainer">
+      <div v-for="(comment, index) in comments" :key="comment.id">
+          <div :class="{pushFooter: index === comments.length-1}"  class="commentContainer">
               <p>{{comment.body}}</p>
               <div class="replyButtonsContainer">
                 <div @click="toggleReplyForm(comment.id)" class="replyButton">reply</div>
@@ -185,7 +185,7 @@ export default {
 
 .commentContainer {
     margin-top: 50px;
-    width: 700px;
+    max-width: 700px;
     box-shadow: 2px 2px 2px 2px grey;
     padding: 5px 5px 0px 5px;
 }

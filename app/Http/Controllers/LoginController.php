@@ -16,6 +16,7 @@ class LoginController extends Controller
         $credentials = $request->only("username", "password");
 
         if(Auth::attempt($credentials)){
+            dd(Auth::check());
             return response(Auth::user(), 200);
         }
         
@@ -42,6 +43,10 @@ class LoginController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+    }
+
+    public function me(){
+        dd(Auth::check());
     }
 
 }

@@ -41,9 +41,6 @@ export default {
         LoginModal
     },
     methods: {
-        changeSelect(string){
-            this.$store.commit("changeSelected", string)
-        },
         logout(){
             this.$store.dispatch("logout");
         }
