@@ -1,19 +1,20 @@
 <template>
-    <div>
+    <div class="pageContainer">
         <Navbar></Navbar>
-        <div>
-            <router-view/>
-        </div>
+        <router-view/>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar.vue"
+import Footer from "./components/Footer.vue"
 
 
 export default {
     components: {
         Navbar,
+        Footer
     },
     data() {
         return {
@@ -25,7 +26,22 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.pageContainer {
+  position: relative;
+  min-height: 100vh;
+}
+
+.space {
+    height: 81.2vh;
+    width: 100%;
+}
 
 
 </style>

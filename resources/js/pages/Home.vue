@@ -14,7 +14,7 @@
                 <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                     <div class="mobileImage"><img :src="article.imageUrl"></div>
                 </router-link>
-                <div class="article">
+                <div class="article"> 
                     <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
                         {{tag.subject}}
                     </div>
@@ -32,9 +32,9 @@
         <div id="hide-small" class="header">
             Most Viewed
         </div>
-        <div id="fix-wrapper-size" class="wrap">
+        <div id="" class="wrap">
             <div v-for="(article, index) in filteredArticles" :key="article.id" style="margin-bottom: 10px; margin-top: 30px;">
-                <div id="fix-article-size" class="highlightedArticles" :style="articleBackgrounds[index]">
+                <div :class="{pushFooter: index === filteredArticles.length-1}" class="highlightedArticles" :style="articleBackgrounds[index]">
                     <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                         <img :src="article.imageUrl" alt="">
                     </router-link>
@@ -59,7 +59,7 @@
            </div>
         <div class="desktopArticleContainer">
             <div v-for="(article, index) in filteredArticles" :key="article.id">
-                <div class="desktopArticle" :style="articleBackgrounds[index]">
+                <div :class="{pushFooter: index === filteredArticles.length-1}" class="desktopArticle" :style="articleBackgrounds[index]">
                     <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                         <img :src="article.imageUrl" alt="">
                     </router-link>
@@ -75,6 +75,7 @@
                 </div>
             </div>
             </div>
+            
         </div>
         
         
@@ -155,10 +156,6 @@ export default {
   #hide-small {display: none}
 }
 
-@media only screen and (min-width: 1181px){
-    #fix-article-size {width: 25vw}
-    #fix-wrapper-size {width: 70vw}
-}
 
 @media only screen and (max-width: 1475px){
     .hide-postlist{display: none}
@@ -260,7 +257,9 @@ img {
     max-width: 650px;
 }
 
-
+.pushFooter {
+    margin-bottom: 150px;
+}
 
 p {
     color: black;

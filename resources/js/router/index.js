@@ -5,6 +5,7 @@ import Home from '../pages/Home.vue'
 import Article from '../pages/Article.vue'
 import Dashboard from "../pages/Dashboard.vue"
 import Create from "../pages/Create.vue"
+import About from "../pages/About.vue"
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ export default new VueRouter({
             path: "/create",
             name: "create",
             component: Create
+        },
+        {
+            path: "/about",
+            name: "about",
+            component: About
         },
         {
             path: "/articles/:articleId",

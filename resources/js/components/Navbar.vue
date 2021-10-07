@@ -1,7 +1,9 @@
 <template>
   <div class="header">
 
-       <img id="hide-logo" style="margin-left: 10px;" :src="logo">
+      <router-link :to="{name: 'home'}">
+        <img id="hide-logo" style="margin-left: 10px;" :src="logo">
+      </router-link>
       <a v-if="!authenticated" style="margin-left: auto; margin-right: 50px;" class='button' v-b-modal.loginModal > log in</a>
 
       <router-link id="small-font" v-if="authenticated" :to="{name: 'home'}" class="button" style="margin-left: 20px" >Home</router-link>
