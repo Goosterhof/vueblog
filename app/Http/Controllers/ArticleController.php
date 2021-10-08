@@ -72,18 +72,6 @@ class ArticleController extends Controller
 
     }
 
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -92,7 +80,21 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $tags = Tag::all();
+        foreach($request->tags as $tag){
+            dd($tag);
+        }
+
+        $article = Article::create([
+            "title" => $request->title,
+            "description" => $request->description,
+            "body" => $request->body,
+            "imageUrl" => $request->imageUrl,
+            "tags" => $request->tags[0]
+        ]);
+
+        dd($article->tags);
     }
 
     /**

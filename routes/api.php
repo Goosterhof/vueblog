@@ -21,8 +21,8 @@ Route::get('getArticles', [ArticleController::class, 'getArticles']);
 
 Route::get('getArticleInfo/{article}', [ArticleController::class, 'getArticleInfo']);
 
+Route::post('createArticle', [ArticleController::class, 'store']);
 Route::post('postComment', [ArticleController::class, 'postComment']);
-
 Route::post('postReply', [ArticleController::class, 'postReply']);
 
 Route::post("register", [LoginController::class, 'register']);

@@ -90,6 +90,9 @@ export default new Vuex.Store({
                 commit("SET_ARTICLE_INFO", response.data)
             })
         },
+        submitArticle({commit}, article){
+            axios.post("/api/createArticle", article)
+        },
         submitComment({ commit }, payload){
             axios.post("api/postComment", payload)
             .then(response => {
@@ -122,9 +125,9 @@ export default new Vuex.Store({
         
         },
 
-        me({commit}){
-            return axios.get("api/me")
-        }
+        // me({commit}){
+        //     return axios.get("api/me")
+        // }
 
     },
       

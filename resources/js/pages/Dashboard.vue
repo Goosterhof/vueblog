@@ -1,12 +1,17 @@
 <template>
   <div class="space">
-      saddsads
+      <Sidebar></Sidebar>
   </div>
 </template>
 
 <script>
-export default {
+import Sidebar from '../components/Sidebar.vue'
 
+
+export default {
+  components: {
+    Sidebar
+  }
 }
 </script>
 
