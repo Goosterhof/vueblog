@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import store from "../store"
+
 import Home from '../pages/Home.vue'
 import Article from '../pages/Article.vue'
 import Dashboard from "../pages/Dashboard.vue"
@@ -19,12 +21,26 @@ export default new VueRouter({
         {
             path: "/dashboard",
             name: "dashboard",
-            component: Dashboard
+            component: Dashboard,
+            beforeEnter: (to, from, next) => {
+                if(store.getters["authenticated"]){
+                    next()
+                } else {
+                    next({name: "home"})
+                }
+            }
         },
         {
             path: "/create",
             name: "create",
-            component: Create
+            component: Create,
+            beforeEnter: (to, from, next) => {
+                if(store.getters["authenticated"]){
+                    next()
+                } else {
+                    next({name: "home"})
+                }
+            }
         },
         {
             path: "/about",

@@ -81,20 +81,21 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         
-        $tags = Tag::all();
-        foreach($request->tags as $tag){
-            dd($tag);
-        }
+
+        // $tags = Tag::all();
+        // foreach($request->tags as $tag){
+        //     dd($tag);
+        // }
 
         $article = Article::create([
             "title" => $request->title,
             "description" => $request->description,
             "body" => $request->body,
             "imageUrl" => $request->imageUrl,
-            "tags" => $request->tags[0]
+            "pepe" => $request->body
         ]);
 
-        dd($article->tags);
+        dd($article->pepe);
     }
 
     /**

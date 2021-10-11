@@ -18,7 +18,6 @@ export default {
         behavior: 'smooth'
       })
       if(this.$route.name !== 'about'){
-        await new Promise(r => setTimeout(r, 280))
         this.$router.push({name: 'about'})
       }
       }

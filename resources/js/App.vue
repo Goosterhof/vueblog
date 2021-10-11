@@ -2,7 +2,8 @@
     <div class="pageContainer">
         <Navbar></Navbar>
         <router-view/>
-        <Footer></Footer>
+        <div v-if="this.$route.name !== 'about'"><Footer></Footer></div>
+        
     </div>
 </template>
 
