@@ -14,7 +14,7 @@
         <b-form-group label="image" label-for="input-image">
           <b-form-input id="input-image" v-model="newArticle.imageUrl"></b-form-input>
         </b-form-group>
-        <b-form-select v-model="newArticle.tags" :options="subjects" multiple></b-form-select>
+          <b-form-select v-model="newArticle.tags" :options="tags.map(t => t.subject)" multiple></b-form-select>
          <b-button class="pushFooter mt-2" type="submit" variant="primary">Submit</b-button>
       </b-form>
       </div>
@@ -28,33 +28,27 @@ export default {
   data() {
     return {
       newArticle: {
+        // author
         title: null,
         description: null,
         body: null,
         imageUrl: "https://images.nrc.nl/J6kNiS4X-JnVV4IeMoeDnIdnpFY=/1920x/filters:no_upscale():format(webp)/s3/static.nrc.nl/images/gn4/stripped/data77158419-8cf3a6.jpg",
         tags: []
       },
-      subjects: [
-        "Lifestyle",
-        "International",
-        "Sports",
-        "Science",
-        "History",
-        "Economy",
-        "Celebrity",
-        "Infrastructure",
-        "Mythology",
-        "Finance",
-        "Travel",
-        "Politics",
-        "Technology",
-      ],
+    }
+  },
+  computed: {
+    tags(){
+      return this.$store.getters.tags
     }
   },
   methods: {
     submitArticle(){
       this.$store.dispatch("submitArticle", this.newArticle)
     }
+  },
+  mounted(){
+    this.$store.dispatch("getTags")
   }
 }
 </script>
