@@ -31,6 +31,7 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
+            "author" => $this->faker->userName(),
             "title" => $this->faker->sentence(5),
             "description" => $this->faker->sentence(25),
             "body" => $this->faker->text(5000),

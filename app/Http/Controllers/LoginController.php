@@ -45,7 +45,7 @@ class LoginController extends Controller
     }
 
     public function me(){
-        dd(Auth::check());
+        dd(Auth::user());
     }
 
 }

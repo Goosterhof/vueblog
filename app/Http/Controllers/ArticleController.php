@@ -72,6 +72,10 @@ class ArticleController extends Controller
 
     }
 
+    public function getTags(){
+        return Tag::get()->all();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -82,20 +86,29 @@ class ArticleController extends Controller
     {
         
 
-        // $tags = Tag::all();
-        // foreach($request->tags as $tag){
-        //     dd($tag);
-        // }
+        $tags = Tag::get()->all();
+        $tagIds = [];
+        foreach($request->tags as $subject){
+            foreach($tags as $tag){
+                if($subject == $tag->subject){
+                    array_push($tagIds, $tag->id);
+                }
+            }
+        }
 
         $article = Article::create([
+            "author" => $request->author,
             "title" => $request->title,
             "description" => $request->description,
             "body" => $request->body,
             "imageUrl" => $request->imageUrl,
-            "pepe" => $request->body
         ]);
 
-        dd($article->pepe);
+        $article->tags()->sync($tagIds);
+
+        $article->save();
+
+     
     }
 
     /**

@@ -13,11 +13,11 @@ export default new Vuex.Store({
         article: [],
         comments: [],
         newComments: [],
+        tags: [],
         user: sessionStorage.user ? JSON.parse(sessionStorage.getItem("user")) : null
     },
     mutations: {
-        SET_ARTICLES(state, payload){
-            let articles = payload.data
+        SET_ARTICLES(state, articles){
             for(const article of articles){
                 article.created_at = article.created_at.slice(0, 10)
             }
@@ -59,6 +59,9 @@ export default new Vuex.Store({
                 }
             }
         },
+        SET_TAGS(state, payload){
+            state.tags = payload
+        },
         SET_USER(state, payload){
             state.user = payload
         },
@@ -74,20 +77,27 @@ export default new Vuex.Store({
         authenticated: state => state.user !== null,
         comments: state => state.comments,
         filteredArticles: state => state.filteredArticles,
-        articles: state => state.articles
-
+        articles: state => state.articles,
+        tags: state => state.tags
     },
     actions: {
         async getArticles({ commit }){
             return axios.get("/api/getArticles")
             .then(response => {
-                commit("SET_ARTICLES", response)
+                const articles = response.data.reverse()
+                commit("SET_ARTICLES", articles)
             })
         },
         getArticle({ commit }, payload){
             axios.get(`/api/getArticleInfo/${payload.id}`)
             .then(response => {
                 commit("SET_ARTICLE_INFO", response.data)
+            })
+        },
+        getTags({commit}) {
+            axios.get("/api/getTags")
+            .then(response => {
+                commit("SET_TAGS", response.data)
             })
         },
         submitArticle({commit}, article){
@@ -117,17 +127,15 @@ export default new Vuex.Store({
             await repository.logout()
             commit("SET_USER", null)
             sessionStorage.removeItem("user")
-            
         },
 
         register({commit}, payload){
            axios.post("api/register", payload)
-        
         },
 
-        // me({commit}){
-        //     return axios.get("api/me")
-        // }
+        me({commit}){
+            return axios.get("api/me")
+        }
 
     },
       

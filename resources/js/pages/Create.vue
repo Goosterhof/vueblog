@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       newArticle: {
-        // author
+        author: this.$store.state.user.username,
         title: null,
         description: null,
         body: null,

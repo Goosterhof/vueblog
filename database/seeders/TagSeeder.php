@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Tag;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Seeder;
 
 class TagSeeder extends Seeder
@@ -12,8 +13,29 @@ class TagSeeder extends Seeder
      *
      * @return void
      */
+    protected $subjects = [
+        "Lifestyle",
+        "International",
+        "Sports",
+        "Science",
+        "History",
+        "Economy",
+        "Celebrity",
+        "Infrastructure",
+        "Mythology",
+        "Finance",
+        "Travel",
+        "Politics",
+        "Technology",
+    ];
+
     public function run()
     {
-        Tag::factory()->count(15)->create();
+        for($i = 0; $i < count($this->subjects); $i++){
+            Tag::create([
+                "subject" => $this->subjects[$i]
+            ]);
+        }
+
     }
 }

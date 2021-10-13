@@ -1,16 +1,26 @@
 <template>
   <div class="space">
-      <Sidebar></Sidebar>
+      
   </div>
 </template>
 
 <script>
+import {mapGetters} from "vuex"
 import Sidebar from '../components/Sidebar.vue'
 
 
 export default {
   components: {
     Sidebar
+  },
+  computed: {
+    ...mapGetters({
+         userArticles: "userArticles",
+         user: "user"
+    })
+  },
+  mounted(){
+    this.$store.dispatch("getUserArticles", this.user)
   }
 }
 </script>

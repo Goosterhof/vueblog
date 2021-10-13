@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 */
 
 Route::get('getArticles', [ArticleController::class, 'getArticles']);
+Route::get('getTags', [ArticleController::class, 'getTags']);
 
 Route::get('getArticleInfo/{article}', [ArticleController::class, 'getArticleInfo']);
 
@@ -29,5 +31,10 @@ Route::post("register", [LoginController::class, 'register']);
 Route::post("login", [LoginController::class, 'login']);
 Route::delete("logout", [LoginController::class, "logout"]);
 route::get("me", [LoginController::class, "me"]);
+
+route::get("sanctum", function() {
+    dd(Auth::user());
+});
+
 
 

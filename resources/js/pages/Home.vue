@@ -15,14 +15,19 @@
                     <div class="mobileImage"><img :src="article.imageUrl"></div>
                 </router-link>
                 <div class="article"> 
-                    <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
-                        {{tag.subject}}
-                    </div>
+                    <div class="absolute">
+                            <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
+                                {{tag.subject}}
+                            </div>
+                        </div>
+                        <div class="text-gray-600 text-sm" style="height: 20px; display: flex; justify-content: end;">by {{article.author}}</div>
                     <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                         <p class="title">{{article.title}}</p>
                         <p class="description">{{article.description}}</p>
                     </router-link>
+                    <div class="text-gray-600 text-sm" style="height: 20px; display: flex; justify-content: end;">{{article.created_at}}</div>
                 </div>
+                
             </div>
         </div>
             
@@ -39,15 +44,20 @@
                         <img :src="article.imageUrl" alt="">
                     </router-link>
                     <div class="article">
-                        <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
-                            {{tag.subject}}
+                        <div class="absolute">
+                            <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
+                                {{tag.subject}}
+                            </div>
                         </div>
+                        <div class="text-gray-600 text-sm" style="height: 20px; display: flex; justify-content: end;">by {{article.author}}</div>
                         <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                             <p class="title">{{article.title}}</p>
                             <p class="description">{{article.description}}</p>
                         </router-link>
                     </div>
+                    <div class="text-gray-600 text-sm" style="height: 15px; display: flex; justify-content: end;">{{article.created_at}}</div>
                 </div>
+                
              </div>
           </div>
     </div>
@@ -64,14 +74,18 @@
                         <img :src="article.imageUrl" alt="">
                     </router-link>
                     <div class="article">
-                        <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
-                            {{tag.subject}}
+                        <div class="absolute">
+                            <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
+                                {{tag.subject}}
+                            </div>
                         </div>
+                        <div class="text-gray-600 text-sm" style="height: 20px; display: flex; justify-content: end;">by {{article.author}}</div>
                         <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
-                            <p class="title">{{article.title}}</p>
+                            <p class="title mt-2">{{article.title}}</p>
                             <p class="description">{{article.description}}</p>
                         </router-link>
                     </div>
+                    <div class="text-gray-600 text-sm" style="height: 15px; display: flex; justify-content: end;">{{article.created_at}}</div>
                 </div>
             </div>
             </div>
