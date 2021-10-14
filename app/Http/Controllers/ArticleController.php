@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +36,11 @@ class ArticleController extends Controller
         return $articles;
     }
 
+    public function getUserArticles(User $user)
+    {
+        $articles = Article::get()->where('author', $user->username);
+        return $articles;
+    }
     public function getArticleInfo(Article $article)
     {
         return [

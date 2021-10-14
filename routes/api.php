@@ -22,6 +22,7 @@ Route::get('getArticles', [ArticleController::class, 'getArticles']);
 Route::get('getTags', [ArticleController::class, 'getTags']);
 
 Route::get('getArticleInfo/{article}', [ArticleController::class, 'getArticleInfo']);
+Route::get('getUserArticles/{user}', [ArticleController::class, 'getUserArticles']);
 
 Route::post('createArticle', [ArticleController::class, 'store']);
 Route::post('postComment', [ArticleController::class, 'postComment']);

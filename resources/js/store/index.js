@@ -10,6 +10,7 @@ export default new Vuex.Store({
         selected: "home",
         articles: [],
         filteredArticles: [],
+        userArticles: [],
         article: [],
         comments: [],
         newComments: [],
@@ -37,6 +38,14 @@ export default new Vuex.Store({
         },
         REMOVE_ARTICLE_FILTER(state){
             state.filteredArticles = state.articles
+        },
+        SET_USER_ARTICLES(state, userArticles){
+            if(typeof(userArticles) === "object"){
+                state.userArticles = [userArticles]
+            } else {
+                state.userArticles = userArticles
+            }
+            
         },
         SET_ARTICLE_INFO(state, payload){
             state.article = payload.article
@@ -74,6 +83,7 @@ export default new Vuex.Store({
     },
     getters: {
         user: state => state.user,
+        userArticles: state => state.userArticles,
         authenticated: state => state.user !== null,
         comments: state => state.comments,
         filteredArticles: state => state.filteredArticles,
@@ -92,6 +102,12 @@ export default new Vuex.Store({
             axios.get(`/api/getArticleInfo/${payload.id}`)
             .then(response => {
                 commit("SET_ARTICLE_INFO", response.data)
+            })
+        },
+        getUserArticles({commit}, user){
+            axios.get(`/api/getUserArticles/${user.id}`)
+            .then(response => {
+                commit("SET_USER_ARTICLES", response.data)
             })
         },
         getTags({commit}) {
@@ -120,22 +136,27 @@ export default new Vuex.Store({
             const { data } = await repository.login(payload)
             commit("SET_USER", data)
 
-            sessionStorage.user = JSON.stringify(data)
+            
         },
 
         async logout({commit}){
             await repository.logout()
             commit("SET_USER", null)
-            sessionStorage.removeItem("user")
+            
         },
 
         register({commit}, payload){
            axios.post("api/register", payload)
         },
 
-        me({commit}){
-            return axios.get("api/me")
-        }
+
+
+        // async me({commit}){
+        //     return axios.get("api/me")
+        //     .then(response => {
+        //         console.log(response)
+        //     })
+        // }
 
     },
       

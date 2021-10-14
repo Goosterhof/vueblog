@@ -22,7 +22,7 @@ export default {
 
     computed: {
         articles(){
-            return this.$store.state.articles.slice(0, 10)
+            return this.$store.state.articles.slice(0, 9)
         },
     },
 
@@ -32,10 +32,11 @@ export default {
 <style scoped>
 
 .container {
-    margin-top: 20px;
+    margin-top: 30px;
     width: 300px;
-    height: 600px;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
@@ -50,6 +51,7 @@ export default {
     font-weight: 600;
     border-bottom: 1px solid black;
     margin-bottom: 10px;
+    line-height: 50px;
 }
 
 .title {
