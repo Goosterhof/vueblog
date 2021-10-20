@@ -45,7 +45,7 @@ class LoginController extends Controller
     }
 
     public function me(){
-        return response(Auth::user(), 200);
+        return Auth::user();
     }
 
 }

@@ -11,7 +11,7 @@
       <router-link id="small-font" v-if="authenticated" :to="{name: 'create'}" class="button" style="margin-left: 10px;">New Article</router-link>
       
       <div v-if="authenticated" style="margin-left: auto; margin-right: 10px; margin-top: 20px;"> 
-          <p id="small-font" style="color: white">Welcome {{user.username}}</p>
+          <p v-if="user" id="small-font" style="color: white">Welcome {{user.username}}</p>
           <a @click="logout()" class="signout">Sign out</a>
       </div>
      

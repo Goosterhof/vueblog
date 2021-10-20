@@ -33,22 +33,22 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 70px;
+  height: 30px;
   background: linear-gradient(45deg, lightgrey, grey);
   display: flex;
 }
 
 .buttonContainer {
   display: flex;
-  margin-bottom: 20px;
-  margin-left: 20px;
+  margin-bottom: 5px;
+  margin-left: 10px;
   flex-direction: row;
   column-gap: 20px;
 }
 
 a {
     color: black;
-    font-size: 20px;
+    font-size: 15px;
     align-self: flex-end;
     cursor: pointer;
 }

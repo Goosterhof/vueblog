@@ -16,6 +16,7 @@ export default new Vuex.Store({
         newComments: [],
         tags: [],
         user: sessionStorage.user ? JSON.parse(sessionStorage.getItem("user")) : null
+        // authenticated: false
     },
     mutations: {
         SET_ARTICLES(state, articles){
@@ -74,6 +75,9 @@ export default new Vuex.Store({
         SET_USER(state, payload){
             state.user = payload
         },
+        // SET_AUTHENTICATED(state, boolean){
+        //     state.authenticated = boolean
+        // },
         CLEAR_STATE(state, payload){
             state.newComments = []
         }
@@ -136,13 +140,13 @@ export default new Vuex.Store({
             const { data } = await repository.login(payload)
             commit("SET_USER", data)
 
-            
+            // sessionStorage.user = JSON.stringify(data);       
         },
 
         async logout({commit}){
             await repository.logout()
             commit("SET_USER", null)
-            
+            // sessionStorage.removeItem('user');
         },
 
         register({commit}, payload){
@@ -151,12 +155,13 @@ export default new Vuex.Store({
 
 
 
-        // async me({commit}){
-        //     return axios.get("api/me")
-        //     .then(response => {
-        //         console.log(response)
-        //     })
-        // }
+        async me({commit}){
+            return axios.get("api/me")
+            .then(response => {
+                console.log(response)
+                commit("SET_AUTHENTICATED", response.data)
+            })
+        }
 
     },
       

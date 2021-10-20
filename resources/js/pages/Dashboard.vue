@@ -1,10 +1,24 @@
+
 <template>
-  <div class="space">
-      <div v-for="(index, article) in userArticles" :key="article.id">
-        <div class="bg-contain ml-12 mt-12 w-64 h-36 border-2  xd" :style="{ 'background-image': 'url(' + articleImages[index] + ')' }"> 
-          {{article.title}}
+  <div class="flex flex-col h-screen flex-wrap ">
+      <div class="w-64 bg-gray-300 h-full">
+        <div @click="button('articles')" id="button">
+          <p id="button-text">My Articles</p>
+        </div>
+        <div @click="button('test')" id="button">
+          <p id="button-text">Test</p>
         </div>
       </div>
+      <div v-if="selected === 'articles'" class="flex flex-column flex-wrap w-full  h-full">
+        <div id="article-background" v-for="article in articles" :key="article.id">
+          <div  class="w-screen h-36"> 
+            <div :style="{backgroundImage: `url(${article.imageUrl})`}"></div>
+          </div>
+        </div>
+      </div>
+      
+
+      
   </div>
 </template>
 
@@ -19,25 +33,68 @@ export default {
   },
   data() {
     return {
-      image: "http://1.bp.blogspot.com/-8PfnHfgrH4I/TylX2v8pTMI/AAAAAAAAJJ4/TICBoSEI57o/s1600/search_by_image_image.png"
+      images: this.$store.getters.articles.map(a => a.imageUrl),
+      selected: "articles",
     }
   },
   computed: {
     ...mapGetters({
+         articles: "articles",
          userArticles: "userArticles",
-         user: "user"
+         user: "user",
     }),
     articleImages(){
-      console.log(this.userArticles.map(a => a.imageUrl))
+      return 
     }
   },
-  mounted(){
-    this.$store.dispatch("getUserArticles", this.user)
+  methods: {
+    button(type) {
+      switch (type) {
+        case "articles":
+          this.selected = "articles"
+          break;
+        case "test":
+          this.selected = "test"
+          break;
+        default:
+          break;
+      }
+    }
+  },
+  async mounted(){
+    await this.$store.dispatch("getArticles")
+    .then(() => {
+    })
+  //   this.$store.dispatch("getUserArticles", this.user)
   }
 }
 </script>
 
-<style>
+<style scoped>
 
+#button {
+  width: 60%;
+  height: 50px;
+  margin-top: 70px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  margin-left: 45px;
+  cursor: pointer;
+}
+
+#button:hover {
+  background: rgb(236, 236, 236);
+}
+
+#button-text {
+  font-size: 25px;
+  line-height: 45px;
+}
+
+#article-background:nth-child(even) {
+  background: rgb(209, 209, 209);
+}
 
 </style>

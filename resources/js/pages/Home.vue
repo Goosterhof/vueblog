@@ -145,7 +145,7 @@ export default {
     },
     async mounted(){
         await this.$store.dispatch("getArticles")
-        .then((res) => {
+        .then(() => {
             for(let i = 0; i < this.filteredArticles.length; i++){
                 this.articleBackgrounds.push({
                     background: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.10)`
