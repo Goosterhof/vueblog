@@ -140,13 +140,13 @@ export default new Vuex.Store({
             const { data } = await repository.login(payload)
             commit("SET_USER", data)
 
-            // sessionStorage.user = JSON.stringify(data);       
+            sessionStorage.user = JSON.stringify(data);       
         },
 
         async logout({commit}){
             await repository.logout()
             commit("SET_USER", null)
-            // sessionStorage.removeItem('user');
+            sessionStorage.removeItem('user');
         },
 
         register({commit}, payload){
@@ -155,13 +155,13 @@ export default new Vuex.Store({
 
 
 
-        async me({commit}){
-            return axios.get("api/me")
-            .then(response => {
-                console.log(response)
-                commit("SET_AUTHENTICATED", response.data)
-            })
-        }
+        // async me({commit}){
+        //     return axios.get("api/me")
+        //     .then(response => {
+        //         console.log(response)
+        //         commit("SET_AUTHENTICATED", response.data)
+        //     })
+        // }
 
     },
       

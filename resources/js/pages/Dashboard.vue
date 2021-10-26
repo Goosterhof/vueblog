@@ -1,7 +1,8 @@
 
 <template>
-  <div class="flex flex-col h-screen flex-wrap ">
-      <div class="w-64 bg-gray-300 h-full">
+  <div class="flex flex-col h-screen flex-wrap bg-gray-500">
+    <div class="w-64 h-12 bg-gray-900 absolute"></div>
+      <div class="w-64 bg-gray-700 h-full">
         <div @click="button('articles')" id="button">
           <p id="button-text">My Articles</p>
         </div>
@@ -9,10 +10,10 @@
           <p id="button-text">Test</p>
         </div>
       </div>
-      <div v-if="selected === 'articles'" class="flex flex-column flex-wrap w-full  h-full">
+      <div v-if="selected === 'articles'" class="flex flex-column flex-wrap w-full   h-full">
         <div id="article-background" v-for="article in articles" :key="article.id">
           <div  class="w-screen h-36"> 
-            <div :style="{backgroundImage: `url(${article.imageUrl})`}"></div>
+    
           </div>
         </div>
       </div>
@@ -38,8 +39,10 @@ export default {
     }
   },
   computed: {
+    articles(){
+      return this.$store.getters.articles.slice(0, 4)
+    },
     ...mapGetters({
-         articles: "articles",
          userArticles: "userArticles",
          user: "user",
     }),
@@ -73,14 +76,11 @@ export default {
 <style scoped>
 
 #button {
-  width: 60%;
+  width: 100%;
   height: 50px;
   margin-top: 70px;
-  background: white;
   display: flex;
   justify-content: center;
-  border-radius: 8px;
-  margin-left: 45px;
   cursor: pointer;
 }
 
@@ -91,10 +91,19 @@ export default {
 #button-text {
   font-size: 25px;
   line-height: 45px;
+  color: white;
 }
 
 #article-background:nth-child(even) {
   background: rgb(209, 209, 209);
+}
+
+#article-background:nth-child(odd) {
+  background: white;
+}
+
+#image-gradient {
+  background: linear-gradient(45deg, black, grey);
 }
 
 </style>

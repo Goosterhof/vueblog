@@ -31,11 +31,11 @@ Route::post('postReply', [ArticleController::class, 'postReply']);
 Route::post("register", [LoginController::class, 'register']);
 Route::post("login", [LoginController::class, 'login']);
 Route::delete("logout", [LoginController::class, "logout"]);
-route::get("me", [LoginController::class, "me"]);
+// route::get("me", [LoginController::class, "me"]);
 
-route::get("sanctum", function() {
-    dd(Auth::user());
-});
+// route::get("sanctum", function() {
+//     dd(Auth::user());
+// });
 
 
 
