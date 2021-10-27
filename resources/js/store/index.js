@@ -41,11 +41,11 @@ export default new Vuex.Store({
             state.filteredArticles = state.articles
         },
         SET_USER_ARTICLES(state, userArticles){
-            if(typeof(userArticles) === "object"){
-                state.userArticles = [userArticles]
-            } else {
-                state.userArticles = userArticles
-            }
+            let articleArray = []
+
+            Object.keys(userArticles).forEach(e => articleArray.push(userArticles[e]))
+            console.log(articleArray)
+            state.userArticles = articleArray
             
         },
         SET_ARTICLE_INFO(state, payload){

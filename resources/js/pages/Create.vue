@@ -45,6 +45,7 @@ export default {
   methods: {
     submitArticle(){
       this.$store.dispatch("submitArticle", this.newArticle)
+      this.$router.push("/")
     }
   },
   mounted(){
