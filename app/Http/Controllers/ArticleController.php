@@ -16,6 +16,8 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * TODO :: unused method, can be removed
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -25,7 +27,10 @@ class ArticleController extends Controller
 
     public function getArticles()
     {
+        // TODO :: no need to do get and all, cause they both get all.
         $articles = Article::get()->all();
+
+        // TODO :: can use a resource here to make this cleaner
         foreach($articles as $article){
             $subjects = [];
             foreach($article->tags as $tag){
@@ -38,9 +43,11 @@ class ArticleController extends Controller
 
     public function getUserArticles(User $user)
     {
+        // TODO :: can immediatly return the $articles
         $articles = Article::get()->where('author', $user->username);
         return $articles;
     }
+
     public function getArticleInfo(Article $article)
     {
         return [
@@ -49,6 +56,7 @@ class ArticleController extends Controller
         ];
     }
 
+    // TODO :: missing validation, can be done in a Form Request Validation: https://laravel.com/docs/8.x/validation#form-request-validation
     public function postComment(Request $request)
     {
 
@@ -58,11 +66,13 @@ class ArticleController extends Controller
             "article_id" => $request->articleId
         ]);
 
+        // TODO :: no need to save, because you use create, which saves automatically
         $comment->save();
 
         return $comment->load("replies");
     }
 
+    // TODO :: missing validation, can be done in a Form Request Validation: https://laravel.com/docs/8.x/validation#form-request-validation
     public function postReply(Request $request)
     {
 
@@ -72,6 +82,7 @@ class ArticleController extends Controller
             "comment_id" => $request->commentId
         ]);
 
+        // TODO :: no need to save, because you use create, which saves automatically
         $reply->save();
 
         return $reply;
@@ -79,6 +90,7 @@ class ArticleController extends Controller
     }
 
     public function getTags(){
+        // TODO :: no need to do get and all, cause they both get all.
         return Tag::get()->all();
     }
 
@@ -90,9 +102,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        
 
+
+        // TODO :: no need to do get and all, cause they both get all.
         $tags = Tag::get()->all();
+
+        // TODO :: it's easier if you send the id's from the frontend to the backend, so you don't need to look them up
         $tagIds = [];
         foreach($request->tags as $subject){
             foreach($tags as $tag){
@@ -112,9 +127,10 @@ class ArticleController extends Controller
 
         $article->tags()->sync($tagIds);
 
+        // TODO :: no need to save, because you use create, which saves automatically
         $article->save();
 
-     
+
     }
 
     /**
