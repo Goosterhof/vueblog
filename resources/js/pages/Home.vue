@@ -1,12 +1,12 @@
 <template>
   <div>
-      
+
     <div style="background: gray; display: flex; justify-content: center;" v-if="filteredBy">
         {{filteredBy}}
         <button @click="removeTag()" style="margin-left: 5px; margin-bottom: 3px" class="close">
            ×
         </button>
-        
+
     </div>
     <div v-if="displayType === 'mobile'">
 
@@ -14,7 +14,7 @@
                 <router-link :to="{ name: 'articles', params: {articleId: article.id}}">
                     <div class="mobileImage"><img :src="article.imageUrl"></div>
                 </router-link>
-                <div class="article"> 
+                <div class="article">
                     <div class="absolute">
                             <div @click="displayArticlesWithThisSubject(tag.subject)" v-for="tag in article.tags" :key="tag.id" class="tags">
                                 {{tag.subject}}
@@ -27,13 +27,13 @@
                     </router-link>
                     <div class="text-gray-600 text-sm" style="height: 20px; display: flex; justify-content: end;">{{article.created_at}}</div>
                 </div>
-                
+
             </div>
         </div>
-            
+
     <div v-if="displayType === 'tablet'">
-           
-         
+
+
         <div id="hide-small" class="header">
             Most Viewed
         </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="text-gray-600 text-sm" style="height: 15px; display: flex; justify-content: end;">{{article.created_at}}</div>
                 </div>
-                
+
              </div>
           </div>
     </div>
@@ -89,16 +89,16 @@
                 </div>
             </div>
             </div>
-            
+
         </div>
-        
-        
+
+
     </div>
 
 
-  
-         
-    
+
+
+
   </div>
 </template>
 
@@ -111,7 +111,7 @@ export default {
         return {
             displayType: null,
             articleBackgrounds: [],
-            filteredBy: null 
+            filteredBy: null
         }
     },
     components: {
@@ -126,7 +126,7 @@ export default {
             if(width > 650 && width < 1170) this.displayType = 'tablet'
             if(width > 1170) this.displayType = 'desktop'
 
-        
+
          },
          displayArticlesWithThisSubject(subject){
              this.$store.commit("FILTER_ARTICLES", subject);
@@ -144,6 +144,7 @@ export default {
      })
     },
     async mounted(){
+        // TODO :: no need to use then when you use await
         await this.$store.dispatch("getArticles")
         .then(() => {
             for(let i = 0; i < this.filteredArticles.length; i++){
@@ -152,11 +153,12 @@ export default {
                 })
             }
         })
+        // TODO :: handleResize is best handled throughout the whole app, so you could set this in App.vue and use the store to set the displayType
         this.handleResize()
         window.addEventListener('resize', this.handleResize)
 
-        
-        
+
+
     },
     destroyed() {
         window.removeEventListener('resize', this.handleResize)
@@ -206,7 +208,7 @@ export default {
 }
 
 .desktopArticle {
-    width: 535px; 
+    width: 535px;
     padding: 10px;
 }
 
@@ -266,7 +268,7 @@ img {
 }
 
 .mobileImage {
-    width: auto;        
+    width: auto;
     border: 5px solid black;
     max-width: 650px;
 }

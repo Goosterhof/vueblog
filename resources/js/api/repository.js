@@ -1,5 +1,7 @@
 import api from "./api"
 
+// TODO :: nice use of repository, but why only for this?
+// You could create multiple repositories which will facilitate the communication with the server
 export default {
     createSession(){
         return api.get("sanctum/csrf-cookie")

@@ -1,5 +1,6 @@
 import axios from "axios"
 
+// TODO :: const, you don't want to be able to change this instance anywhere
 let instance = axios.create({
     withCredentials: true
 })
@@ -11,6 +12,7 @@ instance.interceptors.request.use(request => {
 })
 
 instance.interceptors.response.use(
+    // TODO :: can be even shorter: response => response
     response => {return response},
     error => {
         if(error.response.status === 401){

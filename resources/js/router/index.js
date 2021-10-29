@@ -22,6 +22,7 @@ export default new VueRouter({
             path: "/dashboard",
             name: "dashboard",
             component: Dashboard,
+            // TODO :: same beforeEnter as below, you could make this a function so you dont repeat yourself
             beforeEnter: (to, from, next) => {
                 if(store.getters["authenticated"]){
                     next()

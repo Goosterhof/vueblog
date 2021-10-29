@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
   <b-modal id="loginModal" size="sm">
       <div class="crd" >
           <b-form @submit.prevent="submit()">
@@ -20,10 +20,10 @@
     </template>
       <template #modal-footer="{}">
           <div></div>
-      
+
     </template>
   </b-modal>
-  
+
   <b-modal id="registerModal" size="sm">
       <div class="crd" >
           <b-form @submit.prevent="submit()">
@@ -47,7 +47,7 @@
     </template>
       <template #modal-footer="{}">
           <div></div>
-      
+
     </template>
   </b-modal>
   </div>
@@ -60,7 +60,7 @@ export default {
     return {
       register: false,
 
-      error: null, 
+      error: null,
 
       form: {
         username: "",
@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     async submit(){
+        // TODO :: try to return out of the function when possible, so you don't get so many nested statements
       this.error = null
       if(this.register){
         if(this.form.password !== this.form.confirmPassword){
@@ -83,7 +84,7 @@ export default {
             this.changeToLogin()
           } catch (error) {
              console.log(error)
-            
+
           }
         }
       } else {
@@ -96,7 +97,7 @@ export default {
           this.clearForm()
         }
       }
-      
+
     },
     changeToRegister(){
       this.error = null
@@ -139,13 +140,13 @@ export default {
 }
 
 .register {
-  text-decoration: underline; 
-  color: rgb(0, 174, 255); 
+  text-decoration: underline;
+  color: rgb(0, 174, 255);
 }
 
 .error {
-  position: absolute; 
-  left: 120px; 
+  position: absolute;
+  left: 120px;
   bottom: 50px;
   color: rgb(189, 0, 0);
 }

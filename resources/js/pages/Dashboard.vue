@@ -23,7 +23,7 @@
               <router-link :to="{name: 'articles', params: {articleId: article.id}}">
                 <p class="text-2xl text-black ml-2">{{article.title}}</p>
               </router-link>
-            </div>              
+            </div>
           </div>
         </div>
          <button v-if="articleAmount > 4 && !allArticles" class="bg-white w-48 rounded h-8 mt-3 ml-1">
@@ -31,7 +31,7 @@
          </button>
       </div>
 
-      
+
   </div>
 </template>
 
@@ -58,10 +58,11 @@ export default {
     userArticles(){
       if(this.allArticles){
         return this.$store.getters.userArticles
+        // TODO :: no need for the else, because you return in the if already
       } else {
         return this.$store.getters.userArticles.slice(0, 4)
       }
-      
+
     },
     ...mapGetters({
          user: "user",
@@ -85,12 +86,13 @@ export default {
     }
   },
   async mounted(){
+        // TODO :: no need to use then when you use await
     await this.$store.dispatch("getArticles")
     .then(() => {
       this.$store.dispatch("getUserArticles", this.user)
     })
-    
-   
+
+
   }
 }
 </script>

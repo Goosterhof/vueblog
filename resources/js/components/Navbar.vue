@@ -6,23 +6,27 @@
       </router-link>
       <a v-if="!authenticated" style="margin-left: auto; margin-right: 50px;" class='button' v-b-modal.loginModal > log in</a>
 
+<!--
+    TODO :: you could wrap these router links in a template, so you only need to check authenticated once
+    the template can even be an else, because of the if statement above
+-->
       <router-link id="small-font" v-if="authenticated" :to="{name: 'home'}" class="button" style="margin-left: 20px" >Home</router-link>
       <router-link id="small-font" v-if="authenticated" :to="{name: 'dashboard'}" class="button" style="margin-left: 10px;">Dashboard</router-link>
       <router-link id="small-font" v-if="authenticated" :to="{name: 'create'}" class="button" style="margin-left: 10px;">New Article</router-link>
-      
-      <div v-if="authenticated" style="margin-left: auto; margin-right: 10px; margin-top: 20px;"> 
+
+      <div v-if="authenticated" style="margin-left: auto; margin-right: 10px; margin-top: 20px;">
           <p v-if="user" id="small-font" style="color: white">Welcome {{user.username}}</p>
           <a @click="logout()" class="signout">Sign out</a>
       </div>
-     
 
-      
+
+
          <LoginModal></LoginModal>
 
 
-        
 
-    
+
+
   </div>
 </template>
 
@@ -46,7 +50,7 @@ export default {
         }
     },
     computed: {
-       
+
      ...mapGetters({
          authenticated: "authenticated",
          user: "user",
@@ -78,7 +82,7 @@ export default {
 }
 
 a {
-    
+
     font-size: 20px;
     color: white;
 }
@@ -88,7 +92,7 @@ a {
 }
 
 .button {
-    
+
     color: lightgrey;
 }
 

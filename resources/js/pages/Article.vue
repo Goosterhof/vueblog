@@ -4,6 +4,7 @@
         <img style="width: 100%; height: auto" :src="article.imageUrl" alt="">
       <div class="description">{{ article.description }}</div>
       <div class="body">{{article.body}}</div>
+      <!-- TODO :: no need to use this in the template -->
        <Comments :articleId="parseInt(this.id)"></Comments>
   </div>
 </template>

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import repository from "../api/repository"
+// TODO :: should be import api from '../api/api', cause there you made an axios instance which uses specific stuff
 import axios from 'axios'
 
 Vue.use(Vuex);
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     mutations: {
         SET_ARTICLES(state, articles){
             for(const article of articles){
+                // TODO :: when using resources on the backend it's cleaner to clean this up there
                 article.created_at = article.created_at.slice(0, 10)
             }
             state.articles = articles
@@ -41,12 +43,13 @@ export default new Vuex.Store({
             state.filteredArticles = state.articles
         },
         SET_USER_ARTICLES(state, userArticles){
+            // TODO :: const
             let articleArray = []
 
             Object.keys(userArticles).forEach(e => articleArray.push(userArticles[e]))
             console.log(articleArray)
             state.userArticles = articleArray
-            
+
         },
         SET_ARTICLE_INFO(state, payload){
             state.article = payload.article
@@ -83,7 +86,7 @@ export default new Vuex.Store({
         }
 
 
-      
+
     },
     getters: {
         user: state => state.user,
@@ -95,6 +98,7 @@ export default new Vuex.Store({
         tags: state => state.tags
     },
     actions: {
+        // TODO :: async without an await in it, either remove async or use an await
         async getArticles({ commit }){
             return axios.get("/api/getArticles")
             .then(response => {
@@ -140,7 +144,7 @@ export default new Vuex.Store({
             const { data } = await repository.login(payload)
             commit("SET_USER", data)
 
-            sessionStorage.user = JSON.stringify(data);       
+            sessionStorage.user = JSON.stringify(data);
         },
 
         async logout({commit}){
@@ -164,5 +168,5 @@ export default new Vuex.Store({
         // }
 
     },
-      
+
 });
